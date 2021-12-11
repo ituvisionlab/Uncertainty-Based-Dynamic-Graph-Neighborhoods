@@ -44,12 +44,10 @@ NIH Pancreas dataset is used during experiments. We shared some processed sample
  $ python medical_preprocessing.py
 ```
 ## Inference
-Model and samples need to be downloaded. After downloading it, place them as following:
+Model and samples need to be downloaded from [here](https://web.itu.edu.tr/ozera17/DGMS.rar). After downloading it, place them as following:
 
-Model --> Models
-Samples --> Samples
-
-
+Model --> /
+Data --> /pancreast_ct
 
 Then run the snippet given below
 
