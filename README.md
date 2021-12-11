@@ -47,6 +47,7 @@ NIH Pancreas dataset is used during experiments. We shared some processed sample
 Model and samples need to be downloaded from [here](https://web.itu.edu.tr/ozera17/DGMS.rar). After downloading it, place them as following:
 
 Model --> /
+
 Data --> /pancreast_ct
 
 Then run the snippet given below
