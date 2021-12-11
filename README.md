@@ -50,7 +50,7 @@ Model --> /
 
 Data --> /pancreast_ct
 
-Then run the snippet given below
+Then run `test.py`
 
 ## Training
  
