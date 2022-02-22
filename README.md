@@ -49,8 +49,8 @@ Model and samples need to be downloaded from [here](https://web.itu.edu.tr/ozera
 
 Model --> pancreas_ct/
 
-Data :
-pancreas --> "pancreas_ct/pancreas_npy_3d/test/"
+Data : \
+pancreas --> "pancreas_ct/pancreas_npy_3d/test/" \
 pancreas label --> "pancreas_ct/pancreas_label_npy_3d/test/"
 
 
