@@ -38,7 +38,7 @@ results.
  $ conda install --file requirements.txt
 ```
 ## Data preparation
-[NIH Pancreas](https://github.com/rodsom22/gcn_refinement
+[NIH Pancreas](https://wiki.cancerimagingarchive.net/display/Public/Pancreas-CT
 ) dataset is used during experiments. We shared some processed samples for inference codes but for training you have to preprocess all samples with given script below.
 
 ```sh
