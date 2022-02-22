@@ -38,7 +38,8 @@ results.
  $ conda install --file requirements.txt
 ```
 ## Data preparation
-NIH Pancreas dataset is used during experiments. We shared some processed samples for inference codes but for training you have to preprocess all samples with given script below.
+NIH Pancreas[here](https://github.com/rodsom22/gcn_refinement
+) dataset is used during experiments. We shared some processed samples for inference codes but for training you have to preprocess all samples with given script below.
 
 ```sh
  $ python medical_preprocessing.py
@@ -46,16 +47,15 @@ NIH Pancreas dataset is used during experiments. We shared some processed sample
 ## Inference
 Model and samples need to be downloaded from [here](https://web.itu.edu.tr/ozera17/DGMS.rar). After downloading it, place them as following:
 
-Model --> /
+Model --> pancreas_ct/
 
-Data --> /pancreast_ct
+Data :
+pancreas --> "pancreas_ct/pancreas_npy_3d/test/"
+pancreas label --> "pancreas_ct/pancreas_label_npy_3d/test/"
+
 
 Then run `test.py`
 
-## Training
- 
-
-# Acknowledgements
 
 # Citation
 ```latex
