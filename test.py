@@ -20,7 +20,8 @@ def vol_dsc(vol, gt_vol):
 	dsc = (2 * ab + eps) / (a + b + eps)
 	return dsc
 
-def make_prediction(divider, img, ref):
+def make_prediction(divider, img):
+	print(img.shape)
 	slice_count = img.shape[1]
 	pred_tensor = torch.zeros((slice_count, 324, 324)).to(device)
 
@@ -56,11 +57,12 @@ def make_prediction(divider, img, ref):
 	roi_limits = arrtools.bounding_cube(reduced_vol)
 
 	orig_pred[0,roi_limits[0]:roi_limits[3], roi_limits[1]:roi_limits[4], roi_limits[2]:roi_limits[5]] = reduced_vol[roi_limits[0]:roi_limits[3], roi_limits[1]:roi_limits[4], roi_limits[2]:roi_limits[5]]
+	
+	return orig_pred
 
+def get_dsc(divider, img, ref):
+	orig_pred = make_prediction(divider, img)
 	return vol_dsc(orig_pred, ref.detach().cpu().numpy())
-
-
-
 
 BATCH_SIZE = 1
 numworkers = 1
@@ -72,20 +74,26 @@ num_epochs = 1
 divider = 6
 scores = []
 
-mp = "chckpnt.pth"
+mp = "pancreas_ct\checkpoint.pth"
+print("Flag1")
+# print(checkpoint.pth)
 model = torch.load(mp, map_location=device)
+print("Flag2")
 model = model.to(device)
 scores = []
-
+print("Flag3")
 with torch.no_grad():
 	for i, data in enumerate(test_loader):
+		# print("Flag: ", i)
+		# print("Data", data)
+		# exit(0)
 
 		img = data['image'].unsqueeze(0)
 		img_class = data['label'].unsqueeze(0)
 		pan_orig = data['pname']
 
 		print(pan_orig)
-		score = make_prediction(divider, img, img_class)
+		score = make_prediction(divider, img)
 		scores.append(score)
 
 		print("DSC Score: {}".format(score))

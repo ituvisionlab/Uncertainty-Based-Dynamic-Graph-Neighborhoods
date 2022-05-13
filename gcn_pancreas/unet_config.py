@@ -1,6 +1,6 @@
 import torch.optim as optim
 import gcn_pancreas.dlm.fcn_tools as tools
-from gcn_pancreas.dlm import unet
+from . import unet
 import gcn_pancreas.path_config as dirs
 
 # Settings for the Unet

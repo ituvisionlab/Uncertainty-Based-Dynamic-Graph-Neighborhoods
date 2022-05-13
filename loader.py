@@ -84,13 +84,12 @@ class DataReader(torch.utils.data.Dataset):
 
 			else:
 				val_input_folder = os.listdir(val_input_dir)
+				print(val_input_dir)
 				val_input_folder.sort(key=natural_keys)
 				self.pname = val_input_folder
 
 				val_label_folder = os.listdir(val_label_dir)
 				val_label_folder.sort(key=natural_keys)
-
-
 
 			for i in range(len(val_input_folder)):
 				if pancreas_name != "":
@@ -117,12 +116,13 @@ class DataReader(torch.utils.data.Dataset):
 
 		self.indexes = np.random.permutation(self.indexes)
 
-
 	def load_input_img(self, filepath):
 		img = Image.open(filepath).convert('RGB')
 		return img
 
 	def __getitem__(self, index):
+		pancreas_dir = "pancreas_ct/pancreas_npy_3d"
+		label_dir = "pancreas_ct/pancreas_label_npy_3d"
 		if self.mode == 'train':
 
 			vol = np.load(pancreas_dir + "/" + self.mode + "/" + self.pname[self.indexes[index]] + "/" + self.pname[self.indexes[index]] + ".npy")
@@ -167,9 +167,7 @@ class DataReader(torch.utils.data.Dataset):
 
 			return data
 
-		else:
-
-			
+		else:			
 			in_arr = np.load(pancreas_dir + "/" + self.mode + "/" + self.pname[self.indexes[index]] + "/" + self.pname[self.indexes[index]] + ".npy")
 			msk_arr = np.load(label_dir + "/" + self.mode + "/" + self.pname[self.indexes[index]] + "/" + self.pname[self.indexes[index]] + ".npy").astype(np.uint8)
 
