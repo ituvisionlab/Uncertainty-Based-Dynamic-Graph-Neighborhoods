@@ -44,6 +44,9 @@ for fldr in pancreas_list:
 for dirr in temp_dir:
 	temp_dir2 = os.listdir(dirr)#AAA
 	folders_2 = os.listdir(dirr + temp_dir2[0] + "/")#AAA
+	print(temp_dir2)
+	print(folders_2)
+	exit(0)
 	data_dir.append(dirr + temp_dir2[0] + "/" + folders_2[0])#BBB
 
 
