@@ -89,14 +89,17 @@ with torch.no_grad():
 		# exit(0)
 
 		img = data['image'].unsqueeze(0)
-		img_class = data['label'].unsqueeze(0)
+		# img_class = data['label'].unsqueeze(0)
 		pan_orig = data['pname']
 
 		print(pan_orig)
 		score = make_prediction(divider, img)
+		print(score.max())
+		print("Shape: ", score.shape)
 		scores.append(score)
 
-		print("DSC Score: {}".format(score))
+		# print("DSC Score: {}".format(score))
 
 	scores = np.array(scores)
-	print("Mean {} Std {}".format(np.mean(scores),np.std(scores)))
+	np.save("ejemplo0013-aquije", scores[0])
+	# print("Mean {} Std {}".format(np.mean(scores),np.std(scores)))

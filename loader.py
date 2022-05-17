@@ -28,7 +28,7 @@ class DataReader(torch.utils.data.Dataset):
 		self.roi_list = roi_list
 
 
-		pancreas_dir = "pancreas_ct/pancreas_npy_3d"
+		pancreas_dir = "our_pancreas_ct/pancreas_npy_3d"
 		label_dir = "pancreas_ct/pancreas_label_npy_3d"
 
 
@@ -88,8 +88,8 @@ class DataReader(torch.utils.data.Dataset):
 				val_input_folder.sort(key=natural_keys)
 				self.pname = val_input_folder
 
-				val_label_folder = os.listdir(val_label_dir)
-				val_label_folder.sort(key=natural_keys)
+				# val_label_folder = os.listdir(val_label_dir)
+				# val_label_folder.sort(key=natural_keys)
 
 			for i in range(len(val_input_folder)):
 				if pancreas_name != "":
@@ -97,17 +97,17 @@ class DataReader(torch.utils.data.Dataset):
 					temp_label_path = val_label_dir + "/" + pancreas_name
 				else:
 					temp_in_path = val_input_dir + "/" + val_input_folder[i]
-					temp_label_path = val_label_dir + "/" + val_label_folder[i]
+					# temp_label_path = val_label_dir + "/" + val_label_folder[i]
 
 
 				in_img_list = os.listdir(temp_in_path)
 
-				label_img_list = os.listdir(temp_label_path)
+				# label_img_list = os.listdir(temp_label_path)
 
 				in_path = temp_in_path + "/" + in_img_list[0]
-				label_path = temp_label_path + "/" + label_img_list[0]
+				#  label_path = temp_label_path + "/" + label_img_list[0]
 				self.input_img_paths.append(in_path)
-				self.mask_paths.append(label_path)
+				# self.mask_paths.append(label_path)
 
 
 		self.indexes = np.arange(0,len(self.input_img_paths))
@@ -121,8 +121,8 @@ class DataReader(torch.utils.data.Dataset):
 		return img
 
 	def __getitem__(self, index):
-		pancreas_dir = "pancreas_ct/pancreas_npy_3d"
-		label_dir = "pancreas_ct/pancreas_label_npy_3d"
+		pancreas_dir = "our_pancreas_ct/pancreas_npy_3d"
+		# label_dir = "pancreas_ct/pancreas_label_npy_3d"
 		if self.mode == 'train':
 
 			vol = np.load(pancreas_dir + "/" + self.mode + "/" + self.pname[self.indexes[index]] + "/" + self.pname[self.indexes[index]] + ".npy")
@@ -169,17 +169,17 @@ class DataReader(torch.utils.data.Dataset):
 
 		else:			
 			in_arr = np.load(pancreas_dir + "/" + self.mode + "/" + self.pname[self.indexes[index]] + "/" + self.pname[self.indexes[index]] + ".npy")
-			msk_arr = np.load(label_dir + "/" + self.mode + "/" + self.pname[self.indexes[index]] + "/" + self.pname[self.indexes[index]] + ".npy").astype(np.uint8)
+			# msk_arr = np.load(label_dir + "/" + self.mode + "/" + self.pname[self.indexes[index]] + "/" + self.pname[self.indexes[index]] + ".npy").astype(np.uint8)
 
 			input_img = torch.from_numpy(in_arr)
-			msk = torch.from_numpy(msk_arr)
+			# msk = torch.from_numpy(msk_arr)
 
 			input_img = input_img.permute((2,0,1))
-			msk = msk.permute((2, 0, 1))
+			# msk = msk.permute((2, 0, 1))
 
 			data = {}
 			data['image'] = input_img
-			data['label'] = msk
+			# data['label'] = msk
 			data['pname'] = self.pname[self.indexes[index]]
 
 			return data

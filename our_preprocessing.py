@@ -41,33 +41,33 @@ label_list = sorted(label_list)
 for fldr in pancreas_list:
 	temp_dir.append(pancreas_dir + fldr + "/") # ./our_pancreas_train_with_graph/pancreas_ct/Pancreas-CT/Pancreas_0001/
 
+print(temp_dir)
 for dirr in temp_dir:
-	temp_dir2 = os.listdir(dirr) # "fecha" - pancreas0001 - "pancreas - " codigo
-	print(temp_dir2)
-	exit(0)
-	folders_2 = os.listdir(dirr + temp_dir2[0] + "/")#  # "fecha" - pancreas0001 - "pancreas - " codigo/Pancreas-99667
-	data_dir.append(dirr + temp_dir2[0] + "/" + folders_2[0])# ./our_pancreas_train_with_graph/pancreas_ct/Pancreas-CT/Pancreas_0001/asd/asd/ (direccion donde estan los dicom directamente)
+	# temp_dir2 = os.listdir(dirr) # "fecha" - pancreas0001 - "pancreas - " codigo
+	# folders_2 = os.listdir(dirr + temp_dir2[0] + "/")#  # "fecha" - pancreas0001 - "pancreas - " codigo/Pancreas-99667
+	# data_dir.append(dirr + temp_dir2[0] + "/" + folders_2[0])# ./our_pancreas_train_with_graph/pancreas_ct/Pancreas-CT/Pancreas_0001/asd/asd/ (direccion donde estan los dicom directamente)
+	data_dir.append(dirr)
 
 # a este punto, data_dir contiene la direccion de la carpeta que contiene los dicoms de cada PANCREAS_XXXX
 
-pancreas_nifti = "./pancreas_train_with_graph/pancreas_ct/pancreas_nifti/"
-pancreas_npy = "./pancreas_train_with_graph_0106/pancreas_ct/pancreas_npy_3d/"
-pancreas_label_npy = "./pancreas_train_with_graph_0106/pancreas_ct/pancreas_label_npy_3d/"
+pancreas_nifti = "./our_pancreas_train_with_graph/pancreas_ct/pancreas_nifti/"
+pancreas_npy = "./our_pancreas_train_with_graph_0106/pancreas_ct/pancreas_npy_3d/"
+pancreas_label_npy = "./our_pancreas_train_with_graph_0106/pancreas_ct/pancreas_label_npy_3d/"
 
 
 #
 # '''
-#
+
 # for i in range (len(data_dir)):
-#
+
 # 	directory = pancreas_list[i] # una carpeta "PANCREAS_XXXX"
 # 	path = os.path.join(pancreas_nifti, pancreas_list[i]) # dentro de la carpeta de pancreas_nifti, una carpeta con el nombre del pancreas "PANCREAS_XXXX"
 # 	os.mkdir(path)
-#
+
 # 	new_dir = pancreas_nifti + directory # (igual que path)
-#
+
 # 	image = dicom2nifti.convert_directory(data_dir[i], new_dir, compression=True, reorient=True) # convierte el dicom
-#
+# 
 # '''
 #
 #
@@ -75,14 +75,13 @@ pancreas_label_npy = "./pancreas_train_with_graph_0106/pancreas_ct/pancreas_labe
 pancreas_nifti_list = os.listdir(pancreas_nifti) # una vez ya creado todos los nifti, guarda todos los titulos "PANCREAS_XXXX", igual que pancreas_list?
 #pancreas_nifti_list = sorted(pancreas_nifti_list)
 pancreas_nifti_list.sort(key=natural_keys)
-
-
 print("input-start")
 for i in range(len(pancreas_nifti_list)):
-	nifti_example_dir = pancreas_nifti + pancreas_nifti_list[i] + "/none_pancreas.nii.gz"
+	nifti_example_dir = pancreas_nifti + pancreas_nifti_list[i] + "/601_portal_idose_4.nii.gz" #"/none_pancreas.nii.gz"
+	print(nifti_example_dir)
 	nifti = nib.load(nifti_example_dir)
 	img = (np.array(nifti.get_data())*1.0).astype(np.float32)
-
+	print(img.shape)
 	directory = pancreas_list[i]
 	path = os.path.join(pancreas_npy, pancreas_nifti_list[i])
 	os.mkdir(path)
@@ -122,6 +121,7 @@ for i in range(len(pancreas_nifti_list)):
 print("input-end")
 
 
+exit(0)
 
 
 pancreas_label_nifti_list = os.listdir(label_dir)
