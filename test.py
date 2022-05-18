@@ -101,5 +101,5 @@ with torch.no_grad():
 		# print("DSC Score: {}".format(score))
 
 	scores = np.array(scores)
-	np.save("Almenara/Pred_npys/ejemplo0013-aquije", scores[0])
+	np.save("Almenara\Pred_npys\ejemplo0013-aquije", scores[0])
 	# print("Mean {} Std {}".format(np.mean(scores),np.std(scores)))
