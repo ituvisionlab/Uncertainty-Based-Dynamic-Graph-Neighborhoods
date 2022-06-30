@@ -56,6 +56,10 @@ pancreas label --> "pancreas_ct/pancreas_label_npy_3d/test/"
 
 Then run `test.py`
 
+In order to get the masked result, which means the actual segmentation where you can see the pancreas, run `get_pancreas_pred.py`.
+
+Finally, to generate the .jpg file, use `show_pred.py` (Modify line 13 and 22 accordingly)
+
 
 # Citation
 ```latex

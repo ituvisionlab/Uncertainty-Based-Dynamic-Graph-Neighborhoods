@@ -8,9 +8,7 @@ import torch.optim as optim
 import gcn_pancreas.utilities.nparrays as arrtools
 import cnn_utils as helper
 
-
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
 
 def vol_dsc(vol, gt_vol):
 	eps = 1e-9
@@ -68,7 +66,6 @@ BATCH_SIZE = 1
 numworkers = 1
 
 test_loader = DataReader(mode='test', score=False, roi_list="", exp_name="")
-
 
 num_epochs = 1
 divider = 6
